@@ -1,15 +1,14 @@
 (function () {
   'use strict';
 
-  var PA = window.PA;
-
   // expose the controller to the global scope
   PA.instructorsCtrl = function () {
+    // imports
+    var PA = window.PA;
+
     var module = this;
-    var myParagraph = document.createElement('p');
-    myParagraph.innerHTML = 'This is a paragraph that is generated from the instructorsCtrl!';
-    this.mainView.appendChild(myParagraph);
     var select = document.querySelector('form > .pa-instructors-select');
+<<<<<<< HEAD
 
     PA.getJSON('json/instructor.json', function (data) {
       var instructors = data.instructors;
@@ -19,5 +18,8 @@
         select.appendChild(option);
       }
     });
+=======
+    PA.createInstructorSelect(select);
+>>>>>>> 93c7e588f2431e694e17b68020e4bdd62b2496fd
   };
 })();
