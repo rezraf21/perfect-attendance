@@ -10,36 +10,82 @@
       document.getElementId("answer").value(attendance);
     };
 
-    var createReviewTableElement = function (room, date, instructor,
+    var findInstructor = function (id) {
+      var found = {};
+      var instructors = PA.instructors;
+      found.department = undefined;
+      found.instructorName = undefined;
+      found.instructorId = undefined;
+      for (var i = 0; i < instructors.length; i++) {
+        var instructor = instructors[i];
+        if (instructor.instructorId == id) {
+          return found = instructor;
+        }
+      };
+      return found;
+    };
+
+    var clearReviewTable = function () {
+      document.querySelector('.pa-review table tbody').innerHTML = '';
+    };
+
+    var createReviewTableElement = function (room, instructorId, date,
         timeFrom, timeTo, attendance, substitute, substituteInstructor) {
       var tr = document.createElement('tr');
-      var createTd = function (content) {
+      var toggleInstructorSelect = function () {
+        var checked = substituteCheckbox.checked;
+        var substituteInstructor = substituteInstructorTd
+            .querySelector('select');
+        if (!checked) {
+            substituteInstructor.setAttribute('disabled', !checked);
+        } else {
+            substituteInstructor.removeAttribute('disabled');
+        }
+      };
+      var createTd = function (content, type) {
         var td = document.createElement('td');
-        td.innerHTML = content;
+        switch (type) {
+          case 'checkbox':
+            var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.checked = !!content;
+            td.appendChild(checkbox);
+            break;
+          case 'select':
+            var select = document.createElement('select');
+            PA.createInstructorSelect(select);
+            td.appendChild(select);
+            break;
+          default:
+            td.innerHTML = content;
+            break;
+        }
         tr.appendChild(td);
         return td;
       };
-      var roomTd = createTd(room);
-      var dateTd = createTd(date);
-      var instructorTd = createTd(instructor);
-      var timeFromTd = createTd(timeFrom);
-      var timeToTd = createTd(timeTo);
-      var attendanceTd = createTd(attendance);
-      var substituteTd = createTd(substitute);
-      var substituteInstructorTd = createTd(substituteInstructor);
+      createTd(room);
+      createTd(findInstructor(instructorId).instructorName);
+      createTd(date);
+      createTd(timeFrom);
+      createTd(timeTo);
+      createTd(attendance, 'checkbox');
+      var substituteTd = createTd(substitute, 'checkbox');
+      var substituteInstructorTd = createTd(substituteInstructor, 'select');
+      var substituteCheckbox = substituteTd.querySelector('input');
+      toggleInstructorSelect();
+      substituteCheckbox.addEventListener('change', toggleInstructorSelect);
       var reviewTableBody = document.querySelector('.pa-review tbody');
       reviewTableBody.appendChild(tr);
+      return tr;
     };
 
+    clearReviewTable();
     PA.getSchedule(function(schedule) {
       for (var i = 0; i < schedule.length; i++) {
-        createReviewTableElement(schedule[i].roomNo, schedule[i].day,
-            schedule[i].instructorId);
+        var tr = createReviewTableElement(schedule[i].roomNo,
+            schedule[i].instructorId, schedule[i].day, schedule[i].timeFrom,
+            schedule[i].timeTo);
       };
     });
-
-    var select = document.querySelector('.pa-review #select-1');
-    PA.createInstructorSelect(select);
-    // Add more code here...
   };
 })();
