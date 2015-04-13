@@ -7,6 +7,7 @@
     var PA = window.PA;
 
     var module = this;
+<<<<<<< HEAD
     var select = document.querySelector('form > .pa-instructors-select');
 <<<<<<< HEAD
 
@@ -19,6 +20,9 @@
       }
     });
 =======
+=======
+    var select = document.querySelector('.pa-instructors-select');
+>>>>>>> 081ed8de3fe7e44dad81e35670d431cf7c51aac4
     PA.createInstructorSelect(select);
 >>>>>>> 93c7e588f2431e694e17b68020e4bdd62b2496fd
   };
