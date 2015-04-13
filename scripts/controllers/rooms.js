@@ -25,6 +25,10 @@
     var module = this;
     var select = document.querySelector('.pa-rooms-select');
     PA.createRoomSelect(select);
+<<<<<<< HEAD
 >>>>>>> 081ed8de3fe7e44dad81e35670d431cf7c51aac4
+=======
+>>>>>>> 0ed1e1613840c219c5bfc9f2ff36b083ca58a3ad
+>>>>>>> e67883aafadc51c5d507500948c81482005f6e36
   };
 })();
