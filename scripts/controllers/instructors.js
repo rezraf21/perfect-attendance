@@ -23,10 +23,15 @@
 =======
     var select = document.querySelector('.pa-instructors-select');
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 081ed8de3fe7e44dad81e35670d431cf7c51aac4
 =======
 >>>>>>> 0ed1e1613840c219c5bfc9f2ff36b083ca58a3ad
 >>>>>>> e67883aafadc51c5d507500948c81482005f6e36
+=======
+    var table = document.querySelector('.pa-instructors table');
+    PA.createScheduleTable(table);
+>>>>>>> ace77f5b49b5eea7982a5ce9586a222a60f025f5
     PA.createInstructorSelect(select);
 >>>>>>> 93c7e588f2431e694e17b68020e4bdd62b2496fd
   };
